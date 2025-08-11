@@ -8,12 +8,15 @@ function normalize_slug($str) {
     return $str;
 }
 
-// Pega a URL após /clinica/
+// Pega a URL após /
 $path = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '';
-$path = preg_replace('#^/clinica/#', '', $path);
+$path = preg_replace('#^/#', '', $path);
 $path = preg_replace('#[\?\#].*$#', '', $path); // remove query/hash
 $path = trim($path, '/');
-$partes = explode('/', $path); // [agendamento, estado, cidade]
+$partes = explode('/', $path); // [estado, cidade]
+
+// Debug: log da URL e partes
+error_log("URL: " . $_SERVER['REQUEST_URI'] . " | Path: '$path' | Partes: " . implode(',', $partes) . " | Count: " . count($partes));
 
 // Lê o JSON de localidades
 $localidades = [];
@@ -31,6 +34,15 @@ if (file_exists(__DIR__ . '/localidades.json')) {
 
 // Função para redirecionar
 function redirect($url) {
+    error_log("Executando redirect para: " . $url);
+    
+    // Se a URL não começar com http/https, adiciona o protocolo atual
+    if (!preg_match('/^https?:\/\//', $url)) {
+        $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
+        $host = $_SERVER['HTTP_HOST'];
+        $url = $protocol . '://' . $host . $url;
+    }
+    
     header('Location: ' . $url);
     exit;
 }
@@ -41,8 +53,17 @@ $slug_cidade_padrao = $padrao && isset($padrao['cidade']) ? normalize_slug($padr
 
 $nome = '';
 $localidade_valida = false;
-if (count($partes) === 2) {
-    $slug = $partes[1];
+
+// Se acessar apenas /, redireciona para /sao-paulo
+if (count($partes) === 0) {
+    error_log("Redirecionando de / para /sao-paulo");
+    // Redirecionamento direto sem função
+    header('Location: /sao-paulo');
+    exit;
+}
+
+if (count($partes) === 1) {
+    $slug = $partes[0];
     foreach ($localidades as $estado) {
         if (normalize_slug($estado['estado']) === $slug) {
             $nome = $estado['estado'];
@@ -57,28 +78,26 @@ if (count($partes) === 2) {
             }
         }
     }
-    if (!$localidade_valida && $slug_estado_padrao) {
-        redirect("/clinica/agendamento/$slug_estado_padrao");
-    }
-} elseif (count($partes) === 3) {
-    $slug = $partes[2];
+    // Removido redirecionamento automático para evitar loops
+} elseif (count($partes) === 2) {
+    $estado_slug = $partes[0];
+    $cidade_slug = $partes[1];
+    
     foreach ($localidades as $estado) {
-        foreach ($estado['cidades'] as $cidade) {
-            if (normalize_slug($cidade) === $slug) {
-                $nome = $cidade;
-                $localidade_valida = true;
-                break 2;
+        if (normalize_slug($estado['estado']) === $estado_slug) {
+            foreach ($estado['cidades'] as $cidade) {
+                if (normalize_slug($cidade) === $cidade_slug) {
+                    $nome = $cidade;
+                    $localidade_valida = true;
+                    break 2;
+                }
             }
         }
     }
-    if (!$localidade_valida && $slug_estado_padrao && $slug_cidade_padrao) {
-        redirect("/clinica/agendamento/$slug_estado_padrao/$slug_cidade_padrao");
-    }
-} else if (count($partes) === 1 && $slug_estado_padrao) {
-    // Se acessar só /agendamento
-    redirect("/clinica/agendamento/$slug_estado_padrao");
+    // Removido redirecionamento automático para evitar loops
 }
-if (!$nome && count($partes) > 1) {
+
+if (!$nome && count($partes) > 0) {
     // fallback: capitaliza slug
     $nome = ucwords(str_replace('-', ' ', $partes[count($partes)-1]));
 }
@@ -97,22 +116,23 @@ foreach ($localidades as $estado) {
         ];
     }
 }
+
 // Estado/cidade selecionados
 $estado_atual = '';
 $cidade_atual = '';
-if (count($partes) === 2) {
-    // /agendamento/{estado}
-    $estado_slug = $partes[1];
+if (count($partes) === 1) {
+    // /{estado}
+    $estado_slug = $partes[0];
     foreach ($localidades as $estado) {
         if (normalize_slug($estado['estado']) === $estado_slug) {
             $estado_atual = $estado_slug;
             break;
         }
     }
-} elseif (count($partes) === 3) {
-    // /agendamento/{estado}/{cidade}
-    $estado_slug = $partes[1];
-    $cidade_slug = $partes[2];
+} elseif (count($partes) === 2) {
+    // /{estado}/{cidade}
+    $estado_slug = $partes[0];
+    $cidade_slug = $partes[1];
     foreach ($localidades as $estado) {
         if (normalize_slug($estado['estado']) === $estado_slug) {
             $estado_atual = $estado_slug;
@@ -146,7 +166,7 @@ if (count($partes) === 2) {
   <meta name="distribution" content="global">
   
   <!-- Canonical URL -->
-  <link rel="canonical" href="https://seuprojeto.online/clinica/agendamento/">
+  <link rel="canonical" href="https://clinicaolharperfeito.com.br/">
   
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="assets/images/favicon.png">
@@ -158,10 +178,10 @@ if (count($partes) === 2) {
   
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://seuprojeto.online/clinica/agendamento/">
+  <meta property="og:url" content="https://clinicaolharperfeito.com.br/">
   <meta property="og:title" content="Clínica de Optometria em <?php echo $nome ? htmlspecialchars($nome) : '[location]'; ?> Olhar Perfeito">
   <meta property="og:description" content="Clínica em <?php echo $nome ? htmlspecialchars($nome) : '[location]'; ?> especializada com equipe qualificada atendimento humanizado e urgente. Clínica de Optometria Olhar Perfeito.">
-  <meta property="og:image" content="https://seuprojeto.online/clinica/assets/images/2.png">
+  <meta property="og:image" content="https://clinicaolharperfeito.com.br/assets/images/2.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:site_name" content="Clínica de Optometria em <?php echo $nome ? htmlspecialchars($nome) : '[location]'; ?> Olhar Perfeito.">
@@ -169,10 +189,10 @@ if (count($partes) === 2) {
   
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content="https://seuprojeto.online/clinica/agendamento/">
+  <meta property="twitter:url" content="https://clinicaolharperfeito.com.br/">
   <meta property="twitter:title" content="Clínica em <?php echo $nome ? htmlspecialchars($nome) : '[location]'; ?> Especializada Vista Acessível | Clinica de Optometria Olhar Perfeito">
   <meta property="twitter:description" content="Clínica em <?php echo $nome ? htmlspecialchars($nome) : '[location]'; ?> especializada com equipe qualificada atendimento humanizado e urgente. Clínica de Optometria Olhar Perfeito.">
-  <meta property="twitter:image" content="https://seuprojeto.online/clinica/assets/images/2.png">
+  <meta property="twitter:image" content="https://clinicaolharperfeito.com.br/assets/images/2.png">
   
   <!-- Additional SEO -->
   <meta name="theme-color" content="#44B77B">
@@ -180,18 +200,18 @@ if (count($partes) === 2) {
   <meta name="msapplication-config" content="assets/images/browserconfig.xml">
 
   <!-- Css -->
-  <link rel="stylesheet" href="/clinica/assets/lib/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/clinica/assets/lib/fontawesome/css/all.min.css">
-  <link rel="stylesheet" href="/clinica/assets/fonts/inter/inter.css">
-  <link rel="stylesheet" href="/clinica/assets/css/frontend.min.css">
-  <link rel="stylesheet" href="/clinica/assets/css/banner.min.css">
-  <link rel="stylesheet" href="/clinica/assets/css/itens_icone.min.css">
-  <link rel="stylesheet" href="/clinica/assets/css/img_texto.min.css">
-  <link rel="stylesheet" href="/clinica/assets/css/depoimentos.min.css">
-  <link rel="stylesheet" href="/clinica/assets/css/accordion.min.css">
-  <link rel="stylesheet" href="/clinica/assets/css/bloco_servicos.min.css">
-  <link rel="stylesheet" href="/clinica/assets/css/agendamento.css">
-  <link rel="stylesheet" href="/clinica/assets/css/global.css">
+  <link rel="stylesheet" href="/assets/lib/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/lib/fontawesome/css/all.min.css">
+  <link rel="stylesheet" href="/assets/fonts/inter/inter.css">
+  <link rel="stylesheet" href="/assets/css/frontend.min.css">
+  <link rel="stylesheet" href="/assets/css/banner.min.css">
+  <link rel="stylesheet" href="/assets/css/itens_icone.min.css">
+  <link rel="stylesheet" href="/assets/css/img_texto.min.css">
+  <link rel="stylesheet" href="/assets/css/depoimentos.min.css">
+  <link rel="stylesheet" href="/assets/css/accordion.min.css">
+  <link rel="stylesheet" href="/assets/css/bloco_servicos.min.css">
+  <link rel="stylesheet" href="/assets/css/agendamento.css">
+  <link rel="stylesheet" href="/assets/css/global.css">
   
   <!-- reCAPTCHA v3 -->
   <script src="https://www.google.com/recaptcha/api.js?render=6LfD-osrAAAAAOnzFKB8oSQkS_ADQvKGGq82CfR4"></script>
@@ -209,7 +229,7 @@ if (count($partes) === 2) {
           <input type="text" class="form-control" id="nome-desktop" name="nome" placeholder="Seu nome" required>
         </div>
         <div class="col-md-2">
-          <input type="tel" class="form-control" id="telefone-desktop" name="telefone" placeholder="(11) 99999-9999" required>
+          <input type="tel" class="form-control phone" id="telefone-desktop" name="telefone" placeholder="(11) 99999-9999" required>
         </div>
         <div class="col-md-3">
           <input type="email" class="form-control" id="email-desktop" name="email" placeholder="seu@email.com" required>
@@ -256,7 +276,7 @@ if (count($partes) === 2) {
           </div>
           <div class="form-group">
             <label for="telefone-mobile">Telefone</label>
-            <input type="tel" class="form-control" id="telefone-mobile" name="telefone" placeholder="(11) 99999-9999" required>
+            <input type="tel" class="form-control phone" id="telefone-mobile" name="telefone" placeholder="(11) 99999-9999" required>
           </div>
           <div class="form-group">
             <label for="email-mobile">Email</label>
@@ -303,7 +323,7 @@ if (count($partes) === 2) {
     <div class="container">
       <div class="row align-items-center justify-content-lg-between">
         <div class="col-lg-5 col-xl-5">
-          <img src="/clinica/assets/images/logo-clinica.png" alt="Clínica de Optometria Olhar Perfeito." width="270">
+          <img src="/assets/images/logo-clinica.png" alt="Clínica de Optometria Olhar Perfeito." width="270">
           <h1>Exame de Vista Acessível com Optometrista em <?php echo $nome ? htmlspecialchars($nome) : '[location]'; ?>?</h1>
           <p>Você foi selecionado para participar do Projeto Olhar Perfeito em <?php echo $nome ? htmlspecialchars($nome) : '[location]'; ?>! Faça seu <strong>exame de vista 100% Acessível</strong> com optometristas especializados em <?php echo $nome ? htmlspecialchars($nome) : '[location]'; ?>. <strong>Restam poucas vagas</strong> — garanta já a sua!</p>
           <div class="wrapper d-flex flex-column flex-lg-row gap-2 align-items-center">
@@ -316,7 +336,7 @@ if (count($partes) === 2) {
           <span class="tag-image-2">Exame 100% Acessível</span>
           <span class="icone-1"><i class="fa-solid fa-user-plus"></i></span>
           <span class="icone-2"><i class="fa-solid fa-ambulance"></i></span>
-          <img class="main-img" src="/clinica/assets/images/2.png" alt="">
+          <img class="main-img" src="/assets/images/2.png" alt="">
         </figure>
       </div>
     </div>
@@ -326,17 +346,17 @@ if (count($partes) === 2) {
     <div class="container">
       <div class="wrapper d-flex justify-content-lg-between">
         <div class="item">
-          <img class="icone" src="/clinica/assets/images/check.svg" alt="">
+          <img class="icone" src="/assets/images/check.svg" alt="">
           <h3>Exame 100% Acessível em <?php echo $nome ? htmlspecialchars($nome) : '[location]'; ?></h3>
           <p>Sem custo em nenhuma etapa. Projeto exclusivo para quem precisa cuidar da visão agora em <?php echo $nome ? htmlspecialchars($nome) : '[location]'; ?>.</p>
         </div>
         <div class="item">
-          <img class="icone" src="/clinica/assets/images/check.svg" alt="">
+          <img class="icone" src="/assets/images/check.svg" alt="">
           <h3>+200 mil Atendimentos em <?php echo $nome ? htmlspecialchars($nome) : '[location]'; ?></h3>
           <p>Centenas de milhares de pessoas já passaram pelo nosso projeto em <?php echo $nome ? htmlspecialchars($nome) : '[location]'; ?>. Você pode ser o(a) próximo(a) da sua cidade.</p>
         </div>
         <div class="item">
-          <img class="icone" src="/clinica/assets/images/check.svg" alt="">
+          <img class="icone" src="/assets/images/check.svg" alt="">
           <h3>Optometristas Qualificados em <?php echo $nome ? htmlspecialchars($nome) : '[location]'; ?></h3>
           <p>Exame completo com profissionais de optometria capacitados e acolhimento humanizado em <?php echo $nome ? htmlspecialchars($nome) : '[location]'; ?>.</p>
         </div>
@@ -362,7 +382,7 @@ if (count($partes) === 2) {
 
         </div>
         <figure class="col-lg-5 mb-0 order-2 order-lg-2 mt-5 mt-lg-0">
-          <img class="w-100" src="/clinica/assets/images/1.png" alt="">
+          <img class="w-100" src="/assets/images/1.png" alt="">
         </figure>
       </div>
     </div>
@@ -385,7 +405,7 @@ if (count($partes) === 2) {
 
         </div>
         <figure class="col-lg-5 mb-0 order-2 order-lg-0 mt-5 mt-lg-0">
-          <img class="w-100" src="/clinica/assets/images/3.png" alt="">
+          <img class="w-100" src="/assets/images/3.png" alt="">
         </figure>
       </div>
     </div>
@@ -397,26 +417,26 @@ if (count($partes) === 2) {
     <div class="container">
       <div class="wrapper d-flex">
         <div class="depoimento">
-          <img src="/clinica/assets/images/eart.svg" alt="">
+          <img src="/assets/images/eart.svg" alt="">
           <p>"Ótimo atendimento, super atenciosos. Fui tratada com respeito e atenção desde o começo em <?php echo $nome ? htmlspecialchars($nome) : '[location]'; ?>!"</p>
           <figure class="depoimento-pessoa">
-            <img class="object-fit-cover" src="/clinica/assets/images/depoimento-juliana.jpg" alt="">
+            <img class="object-fit-cover" src="/assets/images/depoimento-juliana.jpg" alt="">
           </figure>
           <span class="nome">Juliana R.</span>
         </div>
         <div class="depoimento">
-          <img src="/clinica/assets/images/eart.svg" alt="">
+          <img src="/assets/images/eart.svg" alt="">
           <p>"Fiz meu exame de vista totalmente acessível e já saí sabendo meu grau. Atendimento excelente em <?php echo $nome ? htmlspecialchars($nome) : '[location]'; ?>!"</p>
           <figure class="depoimento-pessoa">
-            <img class="object-fit-cover" src="/clinica/assets/images/depoimento-marcelo.jpg" alt="">
+            <img class="object-fit-cover" src="/assets/images/depoimento-marcelo.jpg" alt="">
           </figure>
           <span class="nome">Marcelo S.</span>
         </div>
         <div class="depoimento">
-          <img src="/clinica/assets/images/eart.svg" alt="">
+          <img src="/assets/images/eart.svg" alt="">
           <p>"Muito bom! Fiz o exame e fui super bem atendida em <?php echo $nome ? htmlspecialchars($nome) : '[location]'; ?>. Já estou usando meus óculos novos. Recomendo!"</p>
           <figure class="depoimento-pessoa">
-            <img class="object-fit-cover" src="/clinica/assets/images/depoimento-renata.jpg" alt="">
+            <img class="object-fit-cover" src="/assets/images/depoimento-renata.jpg" alt="">
           </figure>
           <span class="nome">Renata M.</span>
         </div>
@@ -486,7 +506,7 @@ if (count($partes) === 2) {
     <div class="container">
       <div class="row justify-content-lg-between align-items-center gy-5">
         <div class="texto col-lg-7 col-xl-7">
-          <img src="/clinica/assets/images/logo-clinica.png" alt="Clínica de Optometria Olhar Perfeito." width="270">
+          <img src="/assets/images/logo-clinica.png" alt="Clínica de Optometria Olhar Perfeito." width="270">
           <span class="d-block mt-3 w-100">Vagas Limitadas</span>
           <h2>Exame de Vista Acessível com quem realmente se importa em <?php echo $nome ? htmlspecialchars($nome) : '[location]'; ?></h2>
           <p>Agende agora mesmo seu exame de vista <strong>100% Acessível</strong> pela Clínica Olhar Perfeito. Estamos prontos para te atender com acolhimento, cuidado e equipe especializada em saúde visual. Atendemos em <?php echo $nome ? htmlspecialchars($nome) : '[location]'; ?>, ABC e interior com estrutura completa e profissionais qualificados.</p>
@@ -536,10 +556,11 @@ if (count($partes) === 2) {
   </footer>
 
 <!-- Scripts -->
-<script src="/clinica/assets/lib/jquery/jquery-3.7.1.min.js"></script>
-<script src="/clinica/assets/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="/clinica/assets/lib/mask/jquery.mask.js"></script>
+<script src="/assets/lib/jquery/jquery-3.7.1.min.js"></script>
+<script src="/assets/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/lib/mask/jquery.mask.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="/assets/js/frontend.js"></script>
 <script>
 // Dados de cidades por estado vindos do PHP
 var cidadesPorEstado = <?php echo json_encode($cidades_por_estado); ?>;
@@ -548,7 +569,7 @@ window.currentLocation = <?php echo json_encode($nome ? htmlspecialchars($nome) 
 window.currentEstado = <?php echo json_encode($estado_atual ? htmlspecialchars($estado_atual) : ''); ?>;
 window.currentCidade = <?php echo json_encode($cidade_atual ? htmlspecialchars($cidade_atual) : ''); ?>;
 </script>
-<script src="/clinica/assets/js/agendamento.js"></script>
+<script src="/assets/js/agendamento.js"></script>
     <a href="https://api.whatsapp.com/send?phone=5511910755310&text=Ol%C3%A1,%20gostaria%20de%20agendar%20meu%20exame." target="_blank" id="btn_chat_whatsapp"><span>Agendar Exame</span><i><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" class="whatsapp-icon"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg></i></a>
   <!-- Box de notificações de agendamento -->
   <div id="notificacao-agendamento">
@@ -568,7 +589,7 @@ window.currentCidade = <?php echo json_encode($cidade_atual ? htmlspecialchars($
             <i class="fa-solid fa-check-circle text-success" style="font-size: 4rem;"></i>
           </div>
           <h4 class="modal-title mb-3" id="modalAgradecimentoLabel">Agendamento Realizado com Sucesso!</h4>
-          <p class="text-muted mb-4">Obrigado por agendar seu exame de vista em <?php echo $nome ? htmlspecialchars($nome) : '[location]'; ?>! Entraremos em contato em breve para confirmar os detalhes.</p>
+          <p class="text-muted mb-4" id="modalMensagem">Obrigado por agendar seu exame de vista em <?php echo $nome ? htmlspecialchars($nome) : '[location]'; ?>! Entraremos em contato em breve para confirmar os detalhes.</p>
           <div class="d-grid gap-2">
             <a href="#" target="_blank" class="btn btn-success disabled" id="btnWhatsAppConfirmar" style="display: none;">
               <i class="fab fa-whatsapp me-2"></i>Confirmar no WhatsApp

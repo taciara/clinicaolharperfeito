@@ -41,7 +41,7 @@ $recaptcha_secret_key = 'SUA_CHAVE_SECRETA';
 ### 4. Testar
 
 1. **Teste local:**
-   - Acesse `localhost/clinica/agendamento`
+   - Acesse `localhost/clinica`
    - Preencha o formulário
    - Envie o formulário (reCAPTCHA é invisível)
 

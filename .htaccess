@@ -1,15 +1,58 @@
 RewriteEngine On
 
-# Esconde .php da URL
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME}\.php -f
-RewriteRule ^([^/]+)$ $1.php [L]
+# Força HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-# NÃO redireciona arquivos estáticos
-RewriteCond %{REQUEST_FILENAME} -f
-RewriteRule \.(js|css|png|jpg|jpeg|gif|svg|woff2?|ttf|eot|ico|json|xml|webmanifest)$ - [L,NC]
+# Remove www se presente
+RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
 
-# SPA: redireciona tudo para agendamento.php, exceto arquivos e pastas reais
+# Redireciona a raiz do domínio para /sao-paulo (depois de remover www)
+RewriteCond %{HTTP_HOST} ^clinicaolharperfeito\.com\.br$ [NC]
+RewriteCond %{REQUEST_URI} ^/$
+RewriteRule ^$ /sao-paulo [L,R=301]
+
+# Define index.php como arquivo padrão
+DirectoryIndex index.php
+
+# SPA: redireciona tudo para index.php, exceto arquivos e pastas reais
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^ agendamento.php [QSA,L] 
+RewriteCond %{REQUEST_URI} !^/index\.php
+RewriteRule ^ index.php [QSA,L]
+
+# Compressão GZIP
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/xml
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE application/xml
+    AddOutputFilterByType DEFLATE application/xhtml+xml
+    AddOutputFilterByType DEFLATE application/rss+xml
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/x-javascript
+</IfModule>
+
+# Cache de arquivos estáticos
+<IfModule mod_expires.c>
+    ExpiresActive on
+    ExpiresByType text/css "access plus 1 year"
+    ExpiresByType application/javascript "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType font/woff2 "access plus 1 year"
+    ExpiresByType font/woff "access plus 1 year"
+</IfModule>
+
+# Headers de segurança
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options nosniff
+    Header always set X-Frame-Options DENY
+    Header always set X-XSS-Protection "1; mode=block"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>

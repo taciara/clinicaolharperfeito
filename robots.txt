@@ -1,0 +1,30 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://clinicaolharperfeito.com.br/sitemap.xml
+
+# Permitir acesso a todos os recursos
+Allow: /assets/
+Allow: /assets/css/
+Allow: /assets/js/
+Allow: /assets/images/
+Allow: /assets/fonts/
+
+# Bloquear acesso a arquivos sensíveis
+Disallow: /CONFIGURACAO_GOOGLE_SHEETS.md
+Disallow: /CONFIGURACAO_RECAPTCHA.md
+Disallow: /google_apps_script.js
+Disallow: /localidades.json
+Disallow: /notificacoes.json
+Disallow: /processar_agendamento.php
+Disallow: /router.php
+Disallow: /gerar_sitemap.php
+
+# Bloquear logs e arquivos temporários
+Disallow: /agendamentos_log.txt
+Disallow: /*.log
+Disallow: /*.tmp
+
+# Permitir acesso ao agendamento
+Allow: /index.php 

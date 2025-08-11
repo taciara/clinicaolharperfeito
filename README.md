@@ -5,7 +5,7 @@ Este projeto foi completamente reorganizado para seguir as melhores práticas de
 ## 📁 Estrutura do Projeto
 
 ```
-clinica/
+https://clinicaolharperfeito.com.br
 ├── agendamento.php          # Página principal de agendamento
 ├── conheca.php              # Página "Conheça"
 ├── localidades.json         # Dados das localidades
