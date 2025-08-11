@@ -121,12 +121,26 @@ foreach ($localidades as $estado) {
 $estado_atual = '';
 $cidade_atual = '';
 if (count($partes) === 1) {
-    // /{estado}
-    $estado_slug = $partes[0];
+    // /{estado} ou /{cidade}
+    $slug = $partes[0];
     foreach ($localidades as $estado) {
-        if (normalize_slug($estado['estado']) === $estado_slug) {
-            $estado_atual = $estado_slug;
+        if (normalize_slug($estado['estado']) === $slug) {
+            $estado_atual = $slug;
+            // Se for um estado que também é uma cidade no formulário, define como cidade também
+            $estado_nome = $estado['estado'];
+            if (in_array($estado_nome, ['Belo Horizonte', 'Jardim Ângela', 'Mogi das Cruzes', 'Guarujá', 'Suzano', 'São Vicente', 'Mauá', 'São Miguel', 'Guarulhos', 'Osasco', 'São Mateus', 'Pirajussara', 'Santo Amaro', 'Santo André'])) {
+                $cidade_atual = $slug;
+            } else {
+                // Se não for uma cidade do formulário, não define cidade_atual
+                $cidade_atual = '';
+            }
             break;
+        }
+        foreach ($estado['cidades'] as $cidade) {
+            if (normalize_slug($cidade) === $slug) {
+                $cidade_atual = $slug;
+                break 2;
+            }
         }
     }
 } elseif (count($partes) === 2) {
@@ -298,35 +312,20 @@ if (count($partes) === 1) {
         </div>
         <div class="col-md-2">
           <select class="form-select" id="unidade-desktop" name="unidade" required>
-            <option value="" disabled selected>Selecione a cidade</option>
-            <option value="Belo Horizonte">Belo Horizonte</option>
-            <option value="Jardim Ângela">Jardim Ângela</option>
-            <option value="Mogi das Cruzes">Mogi das Cruzes</option>
-            <option value="Guarujá">Guarujá</option>
-            <option value="Suzano">Suzano</option>
-            <option value="São Vicente">São Vicente</option>
-            <option value="Mauá">Mauá</option>
-            <option value="São Miguel">São Miguel</option>
-            <option value="Guarulhos">Guarulhos</option>
-            <option value="Osasco">Osasco</option>
-            <option value="São Mateus">São Mateus</option>
-            <option value="Pirajussara">Pirajussara</option>
-            <option value="Santo Amaro">Santo Amaro</option>
-            <?php
-              /*
-              if (isset($estado_atual) && $estado_atual) {
-                foreach ($localidades as $estado) {
-                  if (normalize_slug($estado['estado']) === $estado_atual) {
-                    foreach ($estado['cidades'] as $cidade) {
-                      $selected = (isset($cidade_atual) && $cidade_atual && normalize_slug($cidade) === $cidade_atual) ? 'selected' : '';
-                      echo '<option value="' . htmlspecialchars($cidade) . '" ' . $selected . '>' . htmlspecialchars($cidade) . '</option>';
-                    }
-                    break;
-                  }
-                }
-              }
-              */
-            ?>
+            <option value="" disabled <?php echo (!$cidade_atual) ? 'selected' : ''; ?>>Selecione a cidade</option>
+            <option value="Belo Horizonte" <?php echo ($cidade_atual && normalize_slug('Belo Horizonte') === $cidade_atual) ? 'selected' : ''; ?>>Belo Horizonte</option>
+            <option value="Jardim Ângela" <?php echo ($cidade_atual && normalize_slug('Jardim Ângela') === $cidade_atual) ? 'selected' : ''; ?>>Jardim Ângela</option>
+            <option value="Mogi das Cruzes" <?php echo ($cidade_atual && normalize_slug('Mogi das Cruzes') === $cidade_atual) ? 'selected' : ''; ?>>Mogi das Cruzes</option>
+            <option value="Guarujá" <?php echo ($cidade_atual && normalize_slug('Guarujá') === $cidade_atual) ? 'selected' : ''; ?>>Guarujá</option>
+            <option value="Suzano" <?php echo ($cidade_atual && normalize_slug('Suzano') === $cidade_atual) ? 'selected' : ''; ?>>Suzano</option>
+            <option value="São Vicente" <?php echo ($cidade_atual && normalize_slug('São Vicente') === $cidade_atual) ? 'selected' : ''; ?>>São Vicente</option>
+            <option value="Mauá" <?php echo ($cidade_atual && normalize_slug('Mauá') === $cidade_atual) ? 'selected' : ''; ?>>Mauá</option>
+            <option value="São Miguel" <?php echo ($cidade_atual && normalize_slug('São Miguel') === $cidade_atual) ? 'selected' : ''; ?>>São Miguel</option>
+            <option value="Guarulhos" <?php echo ($cidade_atual && normalize_slug('Guarulhos') === $cidade_atual) ? 'selected' : ''; ?>>Guarulhos</option>
+            <option value="Osasco" <?php echo ($cidade_atual && normalize_slug('Osasco') === $cidade_atual) ? 'selected' : ''; ?>>Osasco</option>
+            <option value="São Mateus" <?php echo ($cidade_atual && normalize_slug('São Mateus') === $cidade_atual) ? 'selected' : ''; ?>>São Mateus</option>
+            <option value="Pirajussara" <?php echo ($cidade_atual && normalize_slug('Pirajussara') === $cidade_atual) ? 'selected' : ''; ?>>Pirajussara</option>
+            <option value="Santo Amaro" <?php echo ($cidade_atual && normalize_slug('Santo Amaro') === $cidade_atual) ? 'selected' : ''; ?>>Santo Amaro</option>
           </select>
         </div>
         <div class="col-md-2 d-grid">
@@ -362,33 +361,20 @@ if (count($partes) === 1) {
           <div class="form-group">
             <label for="unidade-mobile">Unidade</label>
             <select class="form-control" id="unidade-mobile" name="unidade" required>
-              <option value="" disabled selected>Selecione a cidade</option>
-              <option value="Belo Horizonte">Belo Horizonte</option>
-              <option value="Jardim Ângela">Jardim Ângela</option>
-              <option value="Mogi das Cruzes">Mogi das Cruzes</option>
-              <option value="Guarujá">Guarujá</option>
-              <option value="Suzano">Suzano</option>
-              <option value="São Vicente">São Vicente</option>
-              <option value="Mauá">Mauá</option>
-              <option value="São Miguel">São Miguel</option>
-              <option value="Guarulhos">Guarulhos</option>
-              <option value="Osasco">Osasco</option>
-              <option value="São Mateus">São Mateus</option>
-              <option value="Pirajussara">Pirajussara</option>
-              <option value="Santo Amaro">Santo Amaro</option>
-              <?php /*
-                if (isset($estado_atual) && $estado_atual) {
-                  foreach ($localidades as $estado) {
-                    if (normalize_slug($estado['estado']) === $estado_atual) {
-                      foreach ($estado['cidades'] as $cidade) {
-                        $selected = (isset($cidade_atual) && $cidade_atual && normalize_slug($cidade) === $cidade_atual) ? 'selected' : '';
-                        echo '<option value="' . htmlspecialchars($cidade) . '" ' . $selected . '>' . htmlspecialchars($cidade) . '</option>';
-                      }
-                      break;
-                    }
-                  }
-                }
-              */?>
+              <option value="" disabled <?php echo (!$cidade_atual) ? 'selected' : ''; ?>>Selecione a cidade</option>
+              <option value="Belo Horizonte" <?php echo ($cidade_atual && normalize_slug('Belo Horizonte') === $cidade_atual) ? 'selected' : ''; ?>>Belo Horizonte</option>
+              <option value="Jardim Ângela" <?php echo ($cidade_atual && normalize_slug('Jardim Ângela') === $cidade_atual) ? 'selected' : ''; ?>>Jardim Ângela</option>
+              <option value="Mogi das Cruzes" <?php echo ($cidade_atual && normalize_slug('Mogi das Cruzes') === $cidade_atual) ? 'selected' : ''; ?>>Mogi das Cruzes</option>
+              <option value="Guarujá" <?php echo ($cidade_atual && normalize_slug('Guarujá') === $cidade_atual) ? 'selected' : ''; ?>>Guarujá</option>
+              <option value="Suzano" <?php echo ($cidade_atual && normalize_slug('Suzano') === $cidade_atual) ? 'selected' : ''; ?>>Suzano</option>
+              <option value="São Vicente" <?php echo ($cidade_atual && normalize_slug('São Vicente') === $cidade_atual) ? 'selected' : ''; ?>>São Vicente</option>
+              <option value="Mauá" <?php echo ($cidade_atual && normalize_slug('Mauá') === $cidade_atual) ? 'selected' : ''; ?>>Mauá</option>
+              <option value="São Miguel" <?php echo ($cidade_atual && normalize_slug('São Miguel') === $cidade_atual) ? 'selected' : ''; ?>>São Miguel</option>
+              <option value="Guarulhos" <?php echo ($cidade_atual && normalize_slug('Guarulhos') === $cidade_atual) ? 'selected' : ''; ?>>Guarulhos</option>
+              <option value="Osasco" <?php echo ($cidade_atual && normalize_slug('Osasco') === $cidade_atual) ? 'selected' : ''; ?>>Osasco</option>
+              <option value="São Mateus" <?php echo ($cidade_atual && normalize_slug('São Mateus') === $cidade_atual) ? 'selected' : ''; ?>>São Mateus</option>
+              <option value="Pirajussara" <?php echo ($cidade_atual && normalize_slug('Pirajussara') === $cidade_atual) ? 'selected' : ''; ?>>Pirajussara</option>
+              <option value="Santo Amaro" <?php echo ($cidade_atual && normalize_slug('Santo Amaro') === $cidade_atual) ? 'selected' : ''; ?>>Santo Amaro</option>
             </select>
           </div>
           <button type="submit" class="submit-btn btn-pulsante">
@@ -417,7 +403,7 @@ if (count($partes) === 1) {
           <h1>Exame de Vista Acessível com Optometrista em <?php echo $nome ? htmlspecialchars($nome) : '[location]'; ?>?</h1>
           <p>Você foi selecionado para participar do Projeto Olhar Perfeito em <?php echo $nome ? htmlspecialchars($nome) : '[location]'; ?>! Faça seu <strong>exame de vista 100% Acessível</strong> com optometristas especializados em <?php echo $nome ? htmlspecialchars($nome) : '[location]'; ?>. <strong>Restam poucas vagas</strong> — garanta já a sua!</p>
           <div class="wrapper d-flex flex-column flex-lg-row gap-2 align-items-center">
-            <a href="https://api.whatsapp.com/send?phone=5511937023409&text=Ol%C3%A1,%20gostaria%20de%20agendar%20meu%20exame." target="_blank" class="btn-padrao btn-pulsante">Agendar Exame</a>
+            <button type="button" class="btn-padrao btn-pulsante" onclick="scrollToForm()">Agendar Exame</button>
             <p>Restam poucas vagas para agendamento!</p>
           </div>
         </div>
@@ -468,7 +454,7 @@ if (count($partes) === 1) {
           <li>Estrutura confortável e segura em <?php echo $nome ? htmlspecialchars($nome) : '[location]'; ?></li>
           <li>Mais de 200 mil pessoas atendidas em <?php echo $nome ? htmlspecialchars($nome) : '[location]'; ?></li>
         </ul>
-        <a href="https://api.whatsapp.com/send?phone=5511937023409&text=Ol%C3%A1,%20gostaria%20de%20agendar%20meu%20exame." target="_blank" class="btn-padrao btn-pulsante">Agendar Exame</a>
+        <button type="button" class="btn-padrao btn-pulsante" onclick="scrollToForm()">Agendar Exame</button>
 
         </div>
         <figure class="col-lg-5 mb-0 order-2 order-lg-2 mt-5 mt-lg-0">
