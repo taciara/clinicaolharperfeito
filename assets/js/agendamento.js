@@ -333,7 +333,7 @@ $(function() {
 
                         var mensagemWhatsApp = prepararMensagemWhatsAppSimples(formData);
 
-                        var whatsappLink = 'https://api.whatsapp.com/send?phone=5511910755310&text=' + mensagemWhatsApp;
+                        var whatsappLink = 'https://api.whatsapp.com/send?phone=5511937023409&text=' + mensagemWhatsApp;
 
                         $('#btnWhatsAppConfirmar')
 
@@ -750,7 +750,7 @@ $(function() {
 
                         var mensagemWhatsApp = prepararMensagemWhatsAppSimples(formData);
 
-                        var whatsappLink = 'https://api.whatsapp.com/send?phone=5511910755310&text=' + mensagemWhatsApp;
+                        var whatsappLink = 'https://api.whatsapp.com/send?phone=5511937023409&text=' + mensagemWhatsApp;
 
                         $('#btnWhatsAppConfirmar')
 

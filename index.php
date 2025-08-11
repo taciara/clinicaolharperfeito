@@ -215,6 +215,68 @@ if (count($partes) === 1) {
   
   <!-- reCAPTCHA v3 -->
   <script src="https://www.google.com/recaptcha/api.js?render=6LfD-osrAAAAAOnzFKB8oSQkS_ADQvKGGq82CfR4"></script>
+
+  <!-- Meta Pixel Code -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src='https://connect.facebook.net/en_US/fbevents.js';
+    s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script');
+    
+    fbq('init', '740439735615253');
+    fbq('track', 'PageView');
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none"
+        src="https://www.facebook.com/tr?id=740439735615253&ev=PageView&noscript=1"/>
+  </noscript>
+  <!-- End Meta Pixel Code -->
+
+  <!-- TikTok Pixel Code -->
+<script>
+  !function (w, d, t) {
+    w.TiktokAnalyticsObject = t;
+    var ttq = w[t] = w[t] || [];
+    ttq.methods = ["page", "track", "identify", "instances", "debug", "on", "off", "once", "ready", "alias", "group", "enableCookie", "disableCookie"],
+    ttq.setAndDefer = function (t, e) {
+      t[e] = function () {
+        t.push([e].concat(Array.prototype.slice.call(arguments, 0)))
+      }
+    };
+    for (var i = 0; i < ttq.methods.length; i++) ttq.setAndDefer(ttq, ttq.methods[i]);
+    ttq.instance = function (t) {
+      for (var e = ttq._i[t] || [], n = 0; n < ttq.methods.length; n++
+      ) ttq.setAndDefer(e, ttq.methods[n]);
+      return e
+    };
+    ttq.load = function (e, n) {
+      var i = "https://analytics.tiktok.com/i18n/pixel/events.js";
+      ttq._i = ttq._i || {};
+      ttq._i[e] = [];
+      ttq._i[e]._u = i;
+      ttq._t = ttq._t || {};
+      ttq._t[e] = +new Date;
+      ttq._o = ttq._o || {};
+      ttq._o[e] = n || {};
+      var o = document.createElement("script");
+      o.type = "text/javascript";
+      o.async = !0;
+      o.src = i + "?sdkid=" + e + "&lib=" + t;
+      var a = document.getElementsByTagName("script")[0];
+      a.parentNode.insertBefore(o, a)
+    };
+    
+    ttq.load('D29M4HJC77U9B02LO3M0');
+    ttq.page();
+  }(window, document, 'ttq');
+</script>
+<!-- End TikTok Pixel Code -->
+
+
 </head>
 <body>
 
@@ -237,7 +299,21 @@ if (count($partes) === 1) {
         <div class="col-md-2">
           <select class="form-select" id="unidade-desktop" name="unidade" required>
             <option value="" disabled selected>Selecione a cidade</option>
+            <option value="Belo Horizonte">Belo Horizonte</option>
+            <option value="Jardim Ângela">Jardim Ângela</option>
+            <option value="Mogi das Cruzes">Mogi das Cruzes</option>
+            <option value="Guarujá">Guarujá</option>
+            <option value="Suzano">Suzano</option>
+            <option value="São Vicente">São Vicente</option>
+            <option value="Mauá">Mauá</option>
+            <option value="São Miguel">São Miguel</option>
+            <option value="Guarulhos">Guarulhos</option>
+            <option value="Osasco">Osasco</option>
+            <option value="São Mateus">São Mateus</option>
+            <option value="Pirajussara">Pirajussara</option>
+            <option value="Santo Amaro">Santo Amaro</option>
             <?php
+              /*
               if (isset($estado_atual) && $estado_atual) {
                 foreach ($localidades as $estado) {
                   if (normalize_slug($estado['estado']) === $estado_atual) {
@@ -249,6 +325,7 @@ if (count($partes) === 1) {
                   }
                 }
               }
+              */
             ?>
           </select>
         </div>
@@ -286,7 +363,20 @@ if (count($partes) === 1) {
             <label for="unidade-mobile">Unidade</label>
             <select class="form-control" id="unidade-mobile" name="unidade" required>
               <option value="" disabled selected>Selecione a cidade</option>
-              <?php
+              <option value="Belo Horizonte">Belo Horizonte</option>
+              <option value="Jardim Ângela">Jardim Ângela</option>
+              <option value="Mogi das Cruzes">Mogi das Cruzes</option>
+              <option value="Guarujá">Guarujá</option>
+              <option value="Suzano">Suzano</option>
+              <option value="São Vicente">São Vicente</option>
+              <option value="Mauá">Mauá</option>
+              <option value="São Miguel">São Miguel</option>
+              <option value="Guarulhos">Guarulhos</option>
+              <option value="Osasco">Osasco</option>
+              <option value="São Mateus">São Mateus</option>
+              <option value="Pirajussara">Pirajussara</option>
+              <option value="Santo Amaro">Santo Amaro</option>
+              <?php /*
                 if (isset($estado_atual) && $estado_atual) {
                   foreach ($localidades as $estado) {
                     if (normalize_slug($estado['estado']) === $estado_atual) {
@@ -298,7 +388,7 @@ if (count($partes) === 1) {
                     }
                   }
                 }
-              ?>
+              */?>
             </select>
           </div>
           <button type="submit" class="submit-btn btn-pulsante">
@@ -327,7 +417,7 @@ if (count($partes) === 1) {
           <h1>Exame de Vista Acessível com Optometrista em <?php echo $nome ? htmlspecialchars($nome) : '[location]'; ?>?</h1>
           <p>Você foi selecionado para participar do Projeto Olhar Perfeito em <?php echo $nome ? htmlspecialchars($nome) : '[location]'; ?>! Faça seu <strong>exame de vista 100% Acessível</strong> com optometristas especializados em <?php echo $nome ? htmlspecialchars($nome) : '[location]'; ?>. <strong>Restam poucas vagas</strong> — garanta já a sua!</p>
           <div class="wrapper d-flex flex-column flex-lg-row gap-2 align-items-center">
-            <a href="https://api.whatsapp.com/send?phone=5511910755310&text=Ol%C3%A1,%20gostaria%20de%20agendar%20meu%20exame." target="_blank" class="btn-padrao btn-pulsante">Agendar Exame</a>
+            <a href="https://api.whatsapp.com/send?phone=5511937023409&text=Ol%C3%A1,%20gostaria%20de%20agendar%20meu%20exame." target="_blank" class="btn-padrao btn-pulsante">Agendar Exame</a>
             <p>Restam poucas vagas para agendamento!</p>
           </div>
         </div>
@@ -378,7 +468,7 @@ if (count($partes) === 1) {
           <li>Estrutura confortável e segura em <?php echo $nome ? htmlspecialchars($nome) : '[location]'; ?></li>
           <li>Mais de 200 mil pessoas atendidas em <?php echo $nome ? htmlspecialchars($nome) : '[location]'; ?></li>
         </ul>
-        <a href="https://api.whatsapp.com/send?phone=5511910755310&text=Ol%C3%A1,%20gostaria%20de%20agendar%20meu%20exame." target="_blank" class="btn-padrao btn-pulsante">Agendar Exame</a>
+        <a href="https://api.whatsapp.com/send?phone=5511937023409&text=Ol%C3%A1,%20gostaria%20de%20agendar%20meu%20exame." target="_blank" class="btn-padrao btn-pulsante">Agendar Exame</a>
 
         </div>
         <figure class="col-lg-5 mb-0 order-2 order-lg-2 mt-5 mt-lg-0">
@@ -401,7 +491,7 @@ if (count($partes) === 1) {
           <li>Equipe treinada para ouvir, orientar e cuidar de você em <?php echo $nome ? htmlspecialchars($nome) : '[location]'; ?></li>
           <li>Mais de 200 mil pessoas já atendidas em <?php echo $nome ? htmlspecialchars($nome) : '[location]'; ?></li>
         </ul>
-        <a href="https://api.whatsapp.com/send?phone=5511910755310&text=Ol%C3%A1,%20gostaria%20de%20agendar%20meu%20exame." target="_blank" class="btn-padrao btn-pulsante">Agendar Exame</a>
+        <a href="https://api.whatsapp.com/send?phone=5511937023409&text=Ol%C3%A1,%20gostaria%20de%20agendar%20meu%20exame." target="_blank" class="btn-padrao btn-pulsante">Agendar Exame</a>
 
         </div>
         <figure class="col-lg-5 mb-0 order-2 order-lg-0 mt-5 mt-lg-0">
@@ -498,7 +588,7 @@ if (count($partes) === 1) {
   <div class="container text-center">
     <h2 class="fw-bold">Agende Seu Exame de Vista 100% Acessível Agora em <?php echo $nome ? htmlspecialchars($nome) : '[location]'; ?></h2>
     <p class="lead">Vagas limitadas em sua região de <?php echo $nome ? htmlspecialchars($nome) : '[location]'; ?>. Garanta seu atendimento com optometrista ainda hoje.</p>
-    <a href="https://api.whatsapp.com/send?phone=5511910755310&text=Ol%C3%A1,%20gostaria%20de%20agendar%20meu%20exame." target="_blank" class="btn btn-light px-4 py-2 btn-pulsante">Agendar Exame</a>
+    <a href="https://api.whatsapp.com/send?phone=5511937023409&text=Ol%C3%A1,%20gostaria%20de%20agendar%20meu%20exame." target="_blank" class="btn btn-light px-4 py-2 btn-pulsante">Agendar Exame</a>
   </div>
 </section>
 
@@ -519,7 +609,7 @@ if (count($partes) === 1) {
               <li>Atendimento rápido e humanizado</li>
               <li>Unidade próximo a <?php echo $nome ? htmlspecialchars($nome) : '[location]'; ?></li>
             </ul>
-            <a href="https://api.whatsapp.com/send?phone=5511910755310&text=Ol%C3%A1,%20gostaria%20de%20agendar%20meu%20exame." target="_blank" class="btn-padrao btn-pulsante">Agendar Exame</a>
+            <a href="https://api.whatsapp.com/send?phone=5511937023409&text=Ol%C3%A1,%20gostaria%20de%20agendar%20meu%20exame." target="_blank" class="btn-padrao btn-pulsante">Agendar Exame</a>
           </div>
         </div>
       </div>
@@ -556,11 +646,11 @@ if (count($partes) === 1) {
   </footer>
 
 <!-- Scripts -->
-<script src="/assets/lib/jquery/jquery-3.7.1.min.js"></script>
-<script src="/assets/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="/assets/lib/mask/jquery.mask.js"></script>
+<script src="/assets/lib/jquery/jquery-3.7.1.min.js?07ago25"></script>
+<script src="/assets/lib/bootstrap/js/bootstrap.bundle.min.js?07ago25"></script>
+<script src="/assets/lib/mask/jquery.mask.js?07ago25"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-<script src="/assets/js/frontend.js"></script>
+<script src="/assets/js/frontend.js?07ago25"></script>
 <script>
 // Dados de cidades por estado vindos do PHP
 var cidadesPorEstado = <?php echo json_encode($cidades_por_estado); ?>;
@@ -569,8 +659,8 @@ window.currentLocation = <?php echo json_encode($nome ? htmlspecialchars($nome) 
 window.currentEstado = <?php echo json_encode($estado_atual ? htmlspecialchars($estado_atual) : ''); ?>;
 window.currentCidade = <?php echo json_encode($cidade_atual ? htmlspecialchars($cidade_atual) : ''); ?>;
 </script>
-<script src="/assets/js/agendamento.js"></script>
-    <a href="https://api.whatsapp.com/send?phone=5511910755310&text=Ol%C3%A1,%20gostaria%20de%20agendar%20meu%20exame." target="_blank" id="btn_chat_whatsapp"><span>Agendar Exame</span><i><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" class="whatsapp-icon"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg></i></a>
+<script src="/assets/js/agendamento.js?07ago25"></script>
+    <a href="https://api.whatsapp.com/send?phone=5511937023409&text=Ol%C3%A1,%20gostaria%20de%20agendar%20meu%20exame." target="_blank" id="btn_chat_whatsapp"><span>Agendar Exame</span><i><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" class="whatsapp-icon"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg></i></a>
   <!-- Box de notificações de agendamento -->
   <div id="notificacao-agendamento">
     <span class="icon"><i class="fa-solid fa-check-circle"></i></span>
