@@ -1,0 +1,172 @@
+{
+  "padrao": {
+    "estado": "São Paulo",
+    "cidade": "São Paulo"
+  },
+  "localidades": [
+    {
+      "estado": "São Paulo",
+      "cidades": [
+        "Centro", "Mooca", "Tatuapé", "Vila Mariana", "Ipiranga", "Santana", "Pinheiros", "Lapa", "Butantã", "Perdizes",
+        "Liberdade", "Sé", "Jabaquara", "Campo Limpo", "Capão Redondo", "Itaquera", "São Mateus", "São Miguel Paulista",
+        "Vila Prudente", "Jardim Ângela", "Brasilândia"
+      ]
+    },
+    {
+      "estado": "Campinas",
+      "cidades": [
+        "Centro",
+        "Cambuí",
+        "Taquaral",
+        "Barão Geraldo",
+        "Sousas",
+        "Joaquim Egídio",
+        "Guanabara",
+        "Jardim Chapadão",
+        "Vila Industrial",
+        "Botafogo",
+        "Bonfim",
+        "Jardim Proença",
+        "Nova Campinas",
+        "Vila Itapura",
+        "Castelo",
+        "Jardim das Paineiras",
+        "Jardim Flamboyant",
+        "Parque Prado",
+        "Jardim do Lago",
+        "Jardim Aurélia",
+        "Parque Industrial",
+        "Jardim Nova Europa",
+        "Jardim Santa Genebra",
+        "Chácara da Barra",
+        "Jardim Garcia",
+        "Jardim São Gabriel",
+        "Jardim Aeroporto",
+        "DIC I",
+        "DIC II",
+        "DIC III",
+        "DIC IV",
+        "DIC V",
+        "DIC VI",
+        "Cidade Satélite Íris",
+        "Jardim Campo Belo",
+        "Jardim Florence I",
+        "Jardim Florence II",
+        "Jardim Rossin",
+        "Jardim Eulina",
+        "Jardim Santa Mônica",
+        "Jardim Santana",
+        "Jardim Ouro Verde",
+        "Jardim São Vicente",
+        "Jardim Roseira",
+        "Jardim São Domingos",
+        "Jardim Nova Mercedes",
+        "Jardim Nova América",
+        "Jardim Capivari",
+        "Vila Padre Anchieta",
+        "Jardim Boa Esperança",
+        "Jardim Ipaussurama",
+        "Vila União",
+        "Jardim Santa Lúcia",
+        "Jardim do Trevo",
+        "Jardim Paulicéia",
+        "Parque das Universidades",
+        "Jardim Londres",
+        "Jardim Nova Boa Vista",
+        "Recanto dos Dourados",
+        "Vila Costa e Silva",
+        "Parque Valença",
+        "Jardim Esmeraldina",
+        "Jardim Myriam",
+        "Jardim Santa Cândida",
+        "Parque Cidade Campinas",
+        "Jardim São José",
+        "Jardim das Oliveiras",
+        "Jardim Leonor",
+        "Vila Teixeira",
+        "Parque Via Norte",
+        "Jardim Brasil",
+        "Parque Fazendinha",
+        "Parque Jambeiro",
+        "Parque São Quirino",
+        "Vila Joaquim Inácio",
+        "Vila San Martin",
+        "Núcleo Residencial Padre Anchieta",
+        "Vila Perseu Leite de Barros",
+        "Jardim do Lago II"
+      ]
+    },
+    {
+      "estado": "Guarujá",
+      "cidades": [
+        "Centro", "Pitangueiras", "Astúrias", "Enseada", "Vila Julia", "Jardim Boa Esperança", "Vicente de Carvalho"
+      ]
+    },
+    {
+      "estado": "Guarulhos",
+      "cidades": [
+        "Centro", "Vila Augusta", "Bonsucesso", "Ponte Grande", "Parque Cecap", "Pimentas", "Jardim São João", "Jardim Presidente Dutra"
+      ]
+    },
+    {
+      "estado": "Jundiaí",
+      "cidades": [
+        "Centro", "Anhangabaú", "Vila Arens", "Vila Hortolândia", "Engordadouro", "Jardim Ermida", "Vila Rami", "Jardim Tulipas"
+      ]
+    },
+    {
+      "estado": "Mauá",
+      "cidades": [
+        "Centro", "Jardim Zaíra", "Vila Assis Brasil", "Parque São Vicente", "Vila Guarani", "Jardim Itapark", "Jardim Oratório"
+      ]
+    },
+    {
+      "estado": "Osasco",
+      "cidades": [
+        "Centro", "Presidente Altino", "Rochdale", "Jardim das Flores", "Vila Yara", "Quitaúna", "Bela Vista", "Piratininga"
+      ]
+    },
+    {
+      "estado": "Santo André",
+      "cidades": [
+        "Centro", "Vila Assunção", "Vila Alpina", "Parque das Nações", "Utinga", "Vila Luzita", "Campestre", "Jardim Stella"
+      ]
+    },
+    {
+      "estado": "São Bernardo do Campo",
+      "cidades": [
+        "Centro", "Rudge Ramos", "Paulicéia", "Assunção", "Baeta Neves", "Jardim do Mar", "Demarchi", "Ferrazópolis"
+      ]
+    },
+    {
+      "estado": "São José dos Campos",
+      "cidades": [
+        "Centro", "Jardim Aquarius", "Jardim Satélite", "Vila Ema", "Bosque dos Eucaliptos", "Jardim das Indústrias", "Parque Industrial"
+      ]
+    },
+    {
+      "estado": "São Vicente",
+      "cidades": [
+        "Centro", "Vila Margarida", "Catiapoã", "Jardim Independência", "Esplanada dos Barreiros", "Cidade Náutica", "Parque Bitaru"
+      ]
+    },
+    {
+      "estado": "Sorocaba",
+      "cidades": [
+        "Centro", "Jardim Santa Rosália", "Jardim São Paulo", "Vila Hortência", "Campolim", "Éden", "Parque Manchester", "Jardim Simus"
+      ]
+    },
+    {
+      "estado": "Suzano",
+      "cidades": [
+        "Centro", "Jardim Colorado", "Vila Urupês", "Jardim Imperador", "Vila Maluf", "Parque Maria Helena", "Jardim Europa"
+      ]
+    },
+    {
+      "estado": "Taboão da Serra",
+      "cidades": [
+        "Centro", "Jardim Maria Rosa", "Parque Pinheiros", "Jardim São Judas", "Parque Assunção", "Jardim Record", "Jardim Leme"
+      ]
+    }    
+  ]
+} 

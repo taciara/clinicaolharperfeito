@@ -1,0 +1,375 @@
+/* Estilos específicos para a página de agendamento */
+
+/* Botão pulsante */
+.btn-pulsante {
+    animation: pulse 1.2s infinite;
+    box-shadow: 0 0 0 0 rgba(68,183,123,0.7);
+}
+
+@keyframes pulse {
+    0% { 
+        box-shadow: 0 0 0 0 rgba(68,183,123,0.7); 
+    }
+    70% { 
+        box-shadow: 0 0 0 10px rgba(68,183,123,0); 
+    }
+    100% { 
+        box-shadow: 0 0 0 0 rgba(68,183,123,0); 
+    }
+}
+
+/* Formulário de agendamento sticky */
+.form-agendamento-sticky {
+    position: sticky;
+    top: 0;
+    z-index: 99999999999999;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+
+
+/* Notificação de agendamento */
+#notificacao-agendamento {
+    position: fixed;
+    left: 20px;
+    bottom: 30px;
+    z-index: 99999;
+    min-width: 260px;
+    max-width: 90vw;
+    background: #fff;
+    color: #222;
+    border-radius: 8px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+    padding: 16px 24px 16px 56px;
+    font-size: .8em;
+    font-weight: 500;
+    display: none;
+    align-items: center;
+    gap: 10px;
+    border-left: 5px solid #44B77B;
+    transition: opacity 0.5s, transform 0.5s;
+    /* Debug: forçar visibilidade temporária */
+    /* display: flex !important; */
+}
+
+#notificacao-agendamento .icon {
+    position: absolute;
+    left: 18px;
+    top: 18px;
+    font-size: 1.5em;
+    color: #44B77B;
+}
+
+/* Responsividade para notificação */
+@media (max-width: 600px) {
+    #notificacao-agendamento {
+        left: 5px;
+        right: 5px;
+        padding-left: 44px;
+        font-size: 0.98em;
+    }
+    #notificacao-agendamento .icon {
+        left: 10px;
+        top: 14px;
+    }
+}
+
+/* Versão mobile da notificação (topo da tela) */
+@media (max-width: 980px) {
+    #notificacao-agendamento {
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: auto;
+        width: 100%;
+        border-radius: 0;
+        border-left: none;
+        border-top: 5px solid #44B77B;
+        background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+        color: #fff;
+        padding: 1rem 2rem 1rem 3rem;
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+    
+    #notificacao-agendamento .icon {
+        position: static;
+        margin-right: 0.5rem;
+        color: #fff;
+    }
+}
+
+/* Estilos para o modal de agradecimento */
+#modalAgradecimento .modal-content {
+    border-radius: 15px;
+    border: none;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+#modalAgradecimento .modal-header {
+    padding: 1rem 1rem 0 1rem;
+}
+
+#modalAgradecimento .modal-body {
+    padding: 2rem;
+}
+
+#modalAgradecimento .fa-check-circle {
+    color: #28a745;
+    animation: pulse 2s infinite;
+}
+
+#modalAgradecimento .btn-success {
+    background-color: #25d366;
+    border-color: #25d366;
+}
+
+#modalAgradecimento .btn-success:hover {
+    background-color: #128c7e;
+    border-color: #128c7e;
+}
+
+/* Loading no botão */
+.btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* ===== ESTILOS MOBILE ===== */
+
+/* Controle de exibição por breakpoint */
+.form-agendamento {
+  /* Versão Desktop (acima de 980px) */
+  .form-desktop {
+    display: block;
+  }
+  
+  .form-mobile {
+    display: none;
+  }
+  
+  /* Versão Mobile (abaixo de 980px) */
+  @media (max-width: 980px) {
+    .form-desktop {
+      display: none;
+    }
+    
+    .form-mobile {
+      display: block;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 9999;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease-in-out;
+      
+      &.active {
+        opacity: 1;
+        visibility: visible;
+        
+        .form-container {
+          transform: translateY(0);
+        }
+      }
+      
+      .form-container {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: #fff;
+        border-radius: 0;
+        padding: 1rem;
+        transform: translateY(100%);
+        transition: transform 0.3s ease-in-out;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        
+        .form-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 1rem;
+          padding-bottom: 1rem;
+          border-bottom: 1px solid #e9ecef;
+          flex-shrink: 0;
+          
+          h3 {
+            margin: 0;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #333;
+          }
+          
+          .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #666;
+            padding: 0.5rem;
+            cursor: pointer;
+            transition: color 0.2s ease;
+            
+            &:hover {
+              color: #333;
+            }
+          }
+        }
+        
+        .form-content {
+          flex: 1;
+          overflow-y: auto;
+          padding-bottom: 1rem;
+          
+          .form-group {
+            margin-bottom: 1rem;
+            
+            label {
+              font-weight: 500;
+              color: #555;
+              margin-bottom: 0.5rem;
+              display: block;
+            }
+            
+            .form-control {
+              border: 2px solid #e9ecef;
+              border-radius: 10px;
+              padding: 0.75rem 1rem;
+              font-size: 1rem;
+              transition: border-color 0.2s ease;
+              
+              &:focus {
+                border-color: #44B77B;
+                box-shadow: 0 0 0 0.2rem rgba(68, 183, 123, 0.25);
+              }
+            }
+          }
+          
+          .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #44B77B 0%, #3a9d6a 100%);
+            border: none;
+            border-radius: 10px;
+            padding: 1rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-top: auto;
+            
+            &:hover {
+              transform: translateY(-2px);
+              box-shadow: 0 4px 12px rgba(68, 183, 123, 0.3);
+            }
+            
+            &:disabled {
+              opacity: 0.7;
+              cursor: not-allowed;
+              transform: none;
+            }
+          }
+        }
+      }
+    }
+    
+    /* Ajustes específicos para celulares menores */
+    @media (max-width: 480px) {
+      .form-mobile .form-container {
+        padding: 0.75rem;
+        
+        .form-header {
+          margin-bottom: 0.75rem;
+          padding-bottom: 0.75rem;
+          
+          h3 {
+            font-size: 1.1rem;
+          }
+        }
+        
+        .form-content {
+          .form-group {
+            margin-bottom: 0.75rem;
+            
+            .form-control {
+              padding: 0.6rem 0.8rem;
+              font-size: 0.95rem;
+            }
+          }
+          
+          .submit-btn {
+            padding: 0.8rem;
+            font-size: 1rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Botão fixo para abrir formulário (mobile) */
+.mobile-agendamento-btn {
+  display: none;
+  
+  @media (max-width: 980px) {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    transform: translateY(0);
+    background: linear-gradient(135deg, #44B77B 0%, #3a9d6a 100%);
+    color: #fff;
+    border: none;
+    border-radius: 0;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    box-shadow: 0 4px 20px rgba(68, 183, 123, 0.4);
+    z-index: 9998;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+    width: 100%;
+    justify-content: center;
+    
+    /* Botão sempre visível - sem estado oculto */
+    
+    .btn-icon {
+      margin-right: 0.5rem;
+      font-size: 1.2rem;
+    }
+    
+    .btn-text {
+      white-space: nowrap;
+    }
+  }
+}
+
+
+
+/* Ajuste do botão WhatsApp no mobile */
+#btn_chat_whatsapp {
+  @media (max-width: 980px) {
+    bottom: 80px; /* Sobe um pouco para não conflitar com o botão de agendamento */
+    z-index: 9996; /* Menor que o botão de agendamento */
+  }
+}
+
+/* Prevenir scroll quando formulário mobile está aberto */
+body.no-scroll {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+}
+
+/* Padding para compensar o botão fixo no mobile */
+@media (max-width: 980px) {
+  body {
+    padding-bottom: 70px; /* Altura do botão fixo */
+  }
+} 

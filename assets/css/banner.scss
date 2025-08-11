@@ -1,0 +1,136 @@
+@use 'cores' as *;
+@use 'buttons';
+
+.banner {
+    h1 {
+        font-weight: 700;
+        font-size: 2.4rem;
+    }
+
+    p {
+        margin: 1.5rem 0;
+        font-size: 1.25rem;
+    }
+    .wrapper {
+        p {
+            margin: 0 0;
+            font-size: .8rem;
+        }
+    }
+
+    figure {
+        position: relative;
+
+        .main-img {
+            width: 100%;
+            height: 27rem;
+            object-fit: contain;
+            padding: 0 3rem;
+        }
+        // tag que fica a esquerda no topo
+        .tag-image-1 {
+            background-color: $primary-600;
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            font-size: 1.2rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            position: absolute;
+            top: -1rem;
+            left: 2rem;
+            color: $text-white;
+        }
+
+        // tag que fica na direita no bottom
+        .tag-image-2 {
+            background-color: $primary-900;
+            display: inline-block;
+            padding: 0.7rem 2rem;
+            border-radius: 0.5rem;
+            color: $text-white;
+            position: absolute;
+            bottom: -1.2rem;
+            right: 3rem;
+        }
+
+        // icones
+        .icone-1,
+        .icone-2 {
+            width: 3.75rem;
+            height: 3.75rem;
+            display: flex;
+            font-size: 1.1rem;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+        }
+
+        .icone-1 {
+            background-color: $primary-700;
+            position: absolute;
+            right: 5rem;
+            top: -1rem;
+        }
+        .icone-2 {
+            background-color: $primary-800;
+            position: absolute;
+            left: 5rem;
+            bottom: -1rem;
+        }
+
+        //
+        .tag-image-1,
+        .tag-image-2,
+        .icone-1,
+        .icone-2 {
+            box-shadow: 0 4px 4px 0 rgba(0, 0, 0, .25);
+        }
+    }
+}
+
+@media (max-width: 62rem) {
+    .banner {
+        h1 {
+            font-size: 1.5rem;
+        }
+        p {
+            font-size: 1rem;
+        }
+
+        .wrapper {
+            p {
+                br {
+                    display: none;
+                }
+            }
+        }
+
+        figure {
+            margin-top: 3rem;
+            
+            .main-img {
+                height: 20rem;
+                object-fit: cover;
+                padding: 0rem 2rem;
+            }
+
+            .tag-image-1 {
+                font-size: 1rem;
+            }
+            .tag-image-2 {
+                right: 1rem;
+            }
+            .icone-1 {
+                right: 1rem;                
+            }
+            .icone-2 {
+                left: 1rem;
+            }
+            .icone-1,
+            .icone-2 {
+                width: 3rem;
+                height: 3rem;
+            }
+        }
+    }
+}

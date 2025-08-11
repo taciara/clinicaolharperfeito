@@ -1,0 +1,22 @@
+ul {
+    padding: 0;
+    list-style: none;
+
+    li {
+        display: flex;
+        margin-bottom: 1rem;
+
+        &::before {
+            content: "";
+            display: inline-block;
+            flex: 0 0 auto;
+            width: 1.2rem;
+            height: 1.2rem;
+            background-image: url(../images/check.svg);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            margin-right: 0.5rem;
+        }
+    }
+}

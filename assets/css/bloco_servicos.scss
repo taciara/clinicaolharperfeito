@@ -1,0 +1,107 @@
+@use 'cores' as *;
+@use 'ul';
+
+$top-rounded: 0.75rem;
+
+.bloco_servicos {
+    .texto {
+        .tag {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: $primary-600;
+        }
+        h2 {
+            font-weight: 600;
+            margin: 0.5rem 0 1rem;
+        }
+        
+    }
+
+    .plano {
+        background: $bg-dark;
+        padding: 3rem 0.5rem 0.5rem;
+        position: relative;
+        border-top-right-radius: $top-rounded;
+        border-top-left-radius: $top-rounded;
+
+        h3 {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 600;
+        }
+
+        ul {
+            padding: 0 5rem;
+            margin: 2rem 0;
+            li {
+                font-size: 1.125rem;
+            }
+        }
+
+        .preco {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 2.5rem;
+            del {
+                color: $primary-600;
+            }
+            ins {
+                text-decoration: none;
+                font-size: 3.5rem;
+                line-height: 3rem;
+                font-weight: 700;
+            }
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            background: $gradient-vertical;
+            color: $text-white;
+            text-decoration: none;
+            padding: 2rem 0;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border-bottom-left-radius: 1rem;
+            border-bottom-right-radius: 1rem;
+
+            &:hover {
+                background: $gradient-vertical-reverse;
+            }
+        }
+
+        &:before {
+            content: ' ';
+            display: block;
+            width: 100%;
+            height: 2rem;
+            background: $gradient-vertical;
+            position: absolute;
+            top: -0.3rem;
+            left: 0;
+            border-top-right-radius: $top-rounded;
+            border-top-left-radius: $top-rounded;
+            z-index: -1;
+        }
+    }
+}
+
+@media (max-width: 62rem) {
+    .bloco_servicos {
+        .texto {
+            .tag {
+                font-size: 1rem;
+            }
+        }
+        .plano {
+            h3 {
+                font-size: 1.5rem;
+            }
+            ul {
+                padding: 0 2rem;
+            }
+        }
+    }
+    
+}

@@ -1,0 +1,15 @@
+@use 'ul';
+
+.img_texto {
+    .texto {
+        h2 {
+            font-weight: 600;
+        }
+    }
+
+    figure {
+        img {
+            border-radius: 0.75rem;
+        }
+    }
+}

@@ -1,0 +1,39 @@
+.accordion-wrapper .texto h2 {
+  font-weight: 600;
+}
+.accordion-wrapper .accordion-item {
+  border: none;
+  background: transparent;
+}
+.accordion-wrapper .accordion-item .accordion-header .accordion-button {
+  background: linear-gradient(90deg, #0081d0 0%, #004066 100%);
+  border-radius: 0.5rem !important;
+  box-shadow: none;
+  color: #fff;
+  font-size: 1.1rem;
+}
+.accordion-wrapper .accordion-item .accordion-header .accordion-button:after {
+  content: "+";
+  font: var(--fa-font-solid);
+  background-image: none;
+  font-size: 1.2rem;
+  width: auto;
+  height: auto;
+}
+.accordion-wrapper .accordion-item .accordion-header .accordion-button[aria-expanded=true]:after {
+  content: "\f068";
+  font: var(--fa-font-solid);
+  font-size: 1.2rem;
+  width: auto;
+  height: auto;
+}
+.accordion-wrapper .accordion-item .accordion-body {
+  color: #06130E;
+}
+.accordion-wrapper .accordion-item .accordion-body p,
+.accordion-wrapper .accordion-item .accordion-body ul,
+.accordion-wrapper .accordion-item .accordion-body ol {
+  color: #06130E;
+}
+
+/*# sourceMappingURL=accordion.css.map */

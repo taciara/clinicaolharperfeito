@@ -1,0 +1,17 @@
+/* Para a versão normal (regular) */
+@font-face {
+    font-family: 'Inter';
+    src: url('inter.woff2') format('woff2');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Para a versão itálica */
+@font-face {
+    font-family: 'Inter';
+    src: url('inter-italic.woff2') format('woff2');
+    font-weight: 100 900;
+    font-style: italic;
+    font-display: swap;
+}

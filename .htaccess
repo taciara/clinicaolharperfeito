@@ -1,0 +1,15 @@
+RewriteEngine On
+
+# Esconde .php da URL
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^([^/]+)$ $1.php [L]
+
+# NÃO redireciona arquivos estáticos
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule \.(js|css|png|jpg|jpeg|gif|svg|woff2?|ttf|eot|ico|json|xml|webmanifest)$ - [L,NC]
+
+# SPA: redireciona tudo para agendamento.php, exceto arquivos e pastas reais
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ agendamento.php [QSA,L] 

@@ -1,0 +1,50 @@
+@use 'cores' as *;
+
+.itens_icone {
+    .wrapper {
+        gap: 0 2rem;
+
+        .item {
+            flex: 0 0 auto;
+            width: 31%;
+            background: $border-gradient;
+            border-radius: 0.5rem;
+            padding: 2.188rem;
+            box-sizing: border-box;
+
+            .icone {
+                width: 2rem;
+                margin-bottom: 1rem;
+            }
+
+            h3 {
+                font-size: 1.5rem;
+                font-weight: 700;
+                margin: 1rem 0;
+            }
+
+        }
+    }
+}
+
+@media (min-width: 64rem) {
+    .itens_icone {
+        .wrapper {
+            gap: 0 2rem;
+            flex-wrap: wrap;
+        }
+    }
+}
+
+@media (max-width: 63rem) {
+    .itens_icone {
+        .wrapper {
+            overflow: auto;
+            padding-bottom: 2rem;
+        
+            .item {
+                width: 100%;
+            }
+        }
+    }
+}

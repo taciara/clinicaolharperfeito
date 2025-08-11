@@ -1,0 +1,51 @@
+@use 'cores' as *;
+
+.accordion-wrapper {
+    .texto {
+        h2 {
+            font-weight: 600;
+        }
+    }
+
+    .accordion-item {
+        border: none;
+        background: transparent;
+        .accordion-header {            
+            .accordion-button {
+                background: $gradient-vertical;
+                border-radius: 0.5rem !important;
+                box-shadow: none;
+                color: $text-white;
+                font-size: 1.1rem;
+
+                &:after {
+                    content: '\2b';
+                    font: var(--fa-font-solid);
+                    background-image: none;
+                    font-size: 1.2rem;
+                    width: auto;
+                    height: auto;
+                }
+
+                &[aria-expanded="true"] {
+                    &:after {
+                        content: '\f068';
+                        font: var(--fa-font-solid);
+                        font-size: 1.2rem;
+                        width: auto;
+                        height: auto;
+                    }
+                }
+            }
+        }       
+        .accordion-body {
+            color: $text-secondary;
+
+            p,
+            ul,
+            ol {
+                color: $text-secondary;
+            }
+        }
+    }
+}

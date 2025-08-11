@@ -1,0 +1,29 @@
+// Paleta de cores primárias
+$primary-600: #0081d0;   // Azul principal
+$primary-700: #006bb3;   // Azul para hover e interações
+$primary-800: #005a99;   // Azul escuro para contrastes suaves
+$primary-900: #004066;   // Azul profundo (títulos, fundos escuros)
+
+// Cores de texto
+$text-primary: #0F221B;   // Texto sobre fundo escuro
+$text-secondary: #06130E; // Subtítulos e descrições leves
+$text-white: #fff; // Subtítulos e descrições leves
+
+// Cores de fundo
+$bg-dark: #FCFCFD;       // Fundo escuro (agradável aos olhos)
+$bg-darkest: #EEF2F6;    // Fundo mais escuro (rodapé, overlays)
+
+// Gradientes
+$gradient-horizontal: linear-gradient(180deg, $primary-600 0%, $primary-900 50%, $bg-dark 100%);
+$gradient-vertical: linear-gradient(90deg, $primary-600 0%, $primary-900 100%);
+$gradient-vertical-reverse: linear-gradient(90deg, $primary-900 0%, $primary-600 100%);
+
+// Borda decorativa com gradiente
+$border-gradient:
+  radial-gradient(circle at 100% 100%, $bg-darkest 0, $bg-darkest 7px, transparent 7px) 0% 0% / 8px 8px no-repeat,
+  radial-gradient(circle at 0 100%, $bg-darkest 0, $bg-darkest 7px, transparent 7px) 100% 0% / 8px 8px no-repeat,
+  radial-gradient(circle at 100% 0, $bg-darkest 0, $bg-darkest 7px, transparent 7px) 0% 100% / 8px 8px no-repeat,
+  radial-gradient(circle at 0 0, $bg-darkest 0, $bg-darkest 7px, transparent 7px) 100% 100% / 8px 8px no-repeat,
+  linear-gradient($bg-darkest, $bg-darkest) 50% 50% / calc(100% - 2px) calc(100% - 16px) no-repeat,
+  linear-gradient($bg-darkest, $bg-darkest) 50% 50% / calc(100% - 16px) calc(100% - 2px) no-repeat,
+  linear-gradient(#004066 0%, #003355 50%, #002244 100%) no-repeat;
