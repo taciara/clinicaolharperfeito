@@ -1,6 +1,33 @@
 // Scripts específicos para a página de agendamento
 
-
+// Função para fazer scroll para o topo da página
+function scrollToForm() {
+    console.log('Função scrollToForm executada - fazendo scroll para o topo');
+    
+    // Scroll simples para o topo da página
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+    
+    // Se for mobile, abre o modal do formulário
+    if (window.innerWidth <= 980) {
+        console.log('Dispositivo mobile detectado, abrindo modal');
+        // Verifica se jQuery está disponível
+        if (typeof $ !== 'undefined') {
+            $('.form-mobile').addClass('active');
+            $('body').addClass('no-scroll');
+        } else {
+            console.log('jQuery não está disponível, usando JavaScript puro');
+            const mobileForm = document.querySelector('.form-mobile');
+            const body = document.body;
+            if (mobileForm) mobileForm.classList.add('active');
+            if (body) body.classList.add('no-scroll');
+        }
+    } else {
+        console.log('Dispositivo desktop detectado - scroll para o topo');
+    }
+}
 
 // Dados de cidades por estado (será preenchido pelo PHP)
 

@@ -62,7 +62,7 @@ ul li::before {
   line-height: 3rem;
   font-weight: 700;
 }
-.bloco_servicos .plano a {
+.bloco_servicos .plano a, .bloco_servicos .plano button {
   display: block;
   text-align: center;
   background: linear-gradient(90deg, #0081d0 0%, #004066 100%);
@@ -74,7 +74,7 @@ ul li::before {
   border-bottom-left-radius: 1rem;
   border-bottom-right-radius: 1rem;
 }
-.bloco_servicos .plano a:hover {
+.bloco_servicos .plano a:hover, .bloco_servicos .plano button:hover {
   background: linear-gradient(90deg, #004066 0%, #0081d0 100%);
 }
 .bloco_servicos .plano:before {
