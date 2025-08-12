@@ -667,9 +667,9 @@ window.currentCidade = <?php echo json_encode($cidade_atual ? htmlspecialchars($
           <h4 class="modal-title mb-3" id="modalAgradecimentoLabel">Agendamento Realizado com Sucesso!</h4>
           <p class="text-muted mb-4" id="modalMensagem">Obrigado por agendar seu exame de vista em <?php echo $nome ? htmlspecialchars($nome) : '[location]'; ?>! Entraremos em contato em breve para confirmar os detalhes.</p>
           <div class="d-grid gap-2">
-            <a href="#" target="_blank" class="btn btn-success disabled" id="btnWhatsAppConfirmar" style="display: none;">
+            <?php /*a href="#" target="_blank" class="btn btn-success disabled" id="btnWhatsAppConfirmar" style="display: none;">
               <i class="fab fa-whatsapp me-2"></i>Confirmar no WhatsApp
-            </a>
+            </a */?>
             <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fechar</button>
           </div>
         </div>
