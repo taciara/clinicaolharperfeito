@@ -378,11 +378,29 @@ $(function() {
 
                         console.log('Elemento encontrado:', $('#btnWhatsAppConfirmar').length > 0);
                         
-                        // Atualiza a mensagem do modal com a unidade selecionada
-                        atualizarMensagemModal(formData.unidade);
-                        
-                        // Mostra o modal de agradecimento
-                        $('#modalAgradecimento').modal('show');
+                        // Cria token de segurança via AJAX
+                        $.ajax({
+                            url: '/gerenciar_tokens.php',
+                            type: 'POST',
+                            data: {
+                                action: 'create',
+                                unidade: formData.unidade
+                            },
+                            dataType: 'json',
+                            success: function(response) {
+                                if (response.success) {
+                                    // Redireciona para página de agradecimento com token
+                                    window.location.href = '/agradecimento.php?token=' + response.token + '&unidade=' + encodeURIComponent(formData.unidade);
+                                } else {
+                                    // Em caso de erro, redireciona sem token (será bloqueado)
+                                    window.location.href = '/agradecimento.php?unidade=' + encodeURIComponent(formData.unidade);
+                                }
+                            },
+                            error: function() {
+                                // Em caso de erro, redireciona sem token (será bloqueado)
+                                window.location.href = '/agradecimento.php?unidade=' + encodeURIComponent(formData.unidade);
+                            }
+                        });
                         
                         // Log de sucesso
                         console.log('Agendamento realizado:', response);
@@ -589,11 +607,13 @@ function prepararMensagemWhatsAppSimples(formData) {
     return encodeURIComponent(mensagem);
 }
 
-// Função para atualizar mensagem do modal
+// Função para atualizar mensagem do modal - EM STANDBY
+/*
 function atualizarMensagemModal(unidade) {
     var mensagem = 'Obrigado por agendar seu exame de vista em ' + unidade + '! Entraremos em contato em breve para confirmar os detalhes.';
     $('#modalMensagem').text(mensagem);
 }
+*/
 
 
 
@@ -601,8 +621,8 @@ function atualizarMensagemModal(unidade) {
 
 $(function() {
 
-    // Reset do botão WhatsApp quando modal é fechado
-
+    // Reset do botão WhatsApp quando modal é fechado - EM STANDBY
+    /*
     $('#modalAgradecimento').on('hidden.bs.modal', function() {
 
         $('#btnWhatsAppConfirmar')
@@ -614,6 +634,7 @@ $(function() {
             .attr('href', '#');
 
     });
+    */
 
     
 
@@ -795,11 +816,29 @@ $(function() {
 
                         console.log('Elemento encontrado:', $('#btnWhatsAppConfirmar').length > 0);
                         
-                        // Atualiza a mensagem do modal com a unidade selecionada
-                        atualizarMensagemModal(formData.unidade);
-                        
-                        // Mostra o modal de agradecimento
-                        $('#modalAgradecimento').modal('show');
+                        // Cria token de segurança via AJAX
+                        $.ajax({
+                            url: '/gerenciar_tokens.php',
+                            type: 'POST',
+                            data: {
+                                action: 'create',
+                                unidade: formData.unidade
+                            },
+                            dataType: 'json',
+                            success: function(response) {
+                                if (response.success) {
+                                    // Redireciona para página de agradecimento com token
+                                    window.location.href = '/agradecimento.php?token=' + response.token + '&unidade=' + encodeURIComponent(formData.unidade);
+                                } else {
+                                    // Em caso de erro, redireciona sem token (será bloqueado)
+                                    window.location.href = '/agradecimento.php?unidade=' + encodeURIComponent(formData.unidade);
+                                }
+                            },
+                            error: function() {
+                                // Em caso de erro, redireciona sem token (será bloqueado)
+                                window.location.href = '/agradecimento.php?unidade=' + encodeURIComponent(formData.unidade);
+                            }
+                        });
                         
                         // Log de sucesso
                         console.log('Agendamento realizado (mobile):', response);

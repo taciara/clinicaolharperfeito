@@ -99,7 +99,8 @@
     }
 }
 
-/* Estilos para o modal de agradecimento */
+/* Estilos para o modal de agradecimento - EM STANDBY */
+/*
 #modalAgradecimento .modal-content {
     border-radius: 15px;
     border: none;
@@ -128,6 +129,7 @@
     background-color: #128c7e;
     border-color: #128c7e;
 }
+*/
 
 /* Loading no botão */
 .btn:disabled {
