@@ -280,7 +280,7 @@ $(function() {
 
                     cidade: window.currentCidade || '',
 
-                    localidade_url: window.currentLocation || '[location]',
+                    localidade_url: window.formatLocalidade(),
 
                     campanha: utmParams.utm_campaign || getUrlParameter('campanha') || 'Orgânico',
 
@@ -704,21 +704,21 @@ $(function() {
 
             var utmParams = getUtmParameters();
 
-            var formData = {
+                            var formData = {
 
-                nome: $('#nome-mobile').val().trim(),
+                    nome: $('#nome-mobile').val().trim(),
 
-                telefone: $('#telefone-mobile').val().trim(),
+                    telefone: $('#telefone-mobile').val().trim(),
 
-                email: $('#email-mobile').val().trim(),
+                    email: $('#email-mobile').val().trim(),
 
-                unidade: $('#unidade-mobile').val(),
+                    unidade: $('#unidade-mobile').val(),
 
-                estado: window.currentEstado || '',
+                    estado: window.currentEstado || '',
 
-                cidade: window.currentCidade || '',
+                    cidade: window.currentCidade || '',
 
-                localidade_url: window.currentLocation || '[location]',
+                    localidade_url: window.formatLocalidade(),
 
                 campanha: utmParams.utm_campaign || getUrlParameter('campanha') || 'Orgânico',
 

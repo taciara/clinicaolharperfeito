@@ -398,5 +398,225 @@
             "ip": "177.112.127.2",
             "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/138.0.0.0 Safari\/537.36"
         }
+    },
+    {
+        "timestamp": 1754957093,
+        "data_hora": "2025-08-12 00:04:53",
+        "dados": {
+            "data": "12\/08\/2025",
+            "hora": "00:04:48",
+            "nome": "Taciara Furtado",
+            "telefone": "(11) 98214-4399",
+            "email": "contato@taciara.com.br",
+            "unidade": "Santo Amaro",
+            "estado": "sao-paulo",
+            "cidade": "santo-amaro",
+            "localidade_url": "Taboão da Serra",
+            "campanha": "Orgânico",
+            "origem_clique": "Direto",
+            "url_completa": "https:\/\/clinicaolharperfeito.com.br\/sao-paulo\/santo-amaro",
+            "ip": "191.30.132.209",
+            "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/138.0.0.0 Safari\/537.36"
+        }
+    },
+    {
+        "timestamp": 1754963408,
+        "data_hora": "2025-08-12 01:50:08",
+        "dados": {
+            "data": "12\/08\/2025",
+            "hora": "01:50:04",
+            "nome": "Gimenes Moises",
+            "telefone": "(11) 99360-0870",
+            "email": "gimenes86@gmail.com",
+            "unidade": "Santo Amaro",
+            "estado": "sao-paulo",
+            "cidade": "santo-amaro",
+            "localidade_url": "Taboão da Serra",
+            "campanha": "Orgânico",
+            "origem_clique": "Direto",
+            "url_completa": "https:\/\/clinicaolharperfeito.com.br\/sao-paulo\/santo-amaro",
+            "ip": "179.108.9.115",
+            "user_agent": "Mozilla\/5.0 (Linux; Android 10; K) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/138.0.0.0 Mobile Safari\/537.36"
+        }
+    },
+    {
+        "timestamp": 1754996102,
+        "data_hora": "2025-08-12 10:55:02",
+        "dados": {
+            "data": "12\/08\/2025",
+            "hora": "10:54:58",
+            "nome": "Teste dia 12*08",
+            "telefone": "(11) 99360-0870",
+            "email": "gimenes86@gmail.com",
+            "unidade": "Belo Horizonte",
+            "estado": "guaruja",
+            "cidade": "guaruja",
+            "localidade_url": "Taboão da Serra",
+            "campanha": "Orgânico",
+            "origem_clique": "Direto",
+            "url_completa": "https:\/\/clinicaolharperfeito.com.br\/guaruja",
+            "ip": "177.112.127.2",
+            "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/138.0.0.0 Safari\/537.36"
+        }
+    },
+    {
+        "timestamp": 1755003476,
+        "data_hora": "2025-08-12 12:57:56",
+        "dados": {
+            "data": "12\/08\/2025",
+            "hora": "12:57:51",
+            "nome": "Pedro Teste scase",
+            "telefone": "(14) 98106-2331",
+            "email": "pedrohenrique.scase@gmail.com",
+            "unidade": "Jardim Ângela",
+            "estado": "sao-paulo",
+            "cidade": "",
+            "localidade_url": "Taboão da Serra",
+            "campanha": "Orgânico",
+            "origem_clique": "Direto",
+            "url_completa": "https:\/\/clinicaolharperfeito.com.br\/sao-paulo",
+            "ip": "177.112.127.2",
+            "user_agent": "Mozilla\/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/138.0.0.0 Safari\/537.36"
+        }
+    },
+    {
+        "timestamp": 1755009903,
+        "data_hora": "2025-08-12 14:45:03",
+        "dados": {
+            "data": "12\/08\/2025",
+            "hora": "14:45:01",
+            "nome": "Gimenes Moises",
+            "telefone": "(11) 99360-0870",
+            "email": "gimenes86@gmail.com",
+            "unidade": "Belo Horizonte",
+            "estado": "sao-paulo",
+            "cidade": "",
+            "localidade_url": "Taboão da Serra",
+            "campanha": "Orgânico",
+            "origem_clique": "Direto",
+            "url_completa": "https:\/\/clinicaolharperfeito.com.br\/sao-paulo",
+            "ip": "177.112.127.2",
+            "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/138.0.0.0 Safari\/537.36"
+        }
+    },
+    {
+        "timestamp": 1755010607,
+        "data_hora": "2025-08-12 14:56:47",
+        "dados": {
+            "data": "12\/08\/2025",
+            "hora": "14:56:45",
+            "nome": "Taciara Furtado",
+            "telefone": "(11) 98214-4399",
+            "email": "contato@taciara.com.br",
+            "unidade": "Mogi das Cruzes",
+            "estado": "sao-paulo",
+            "cidade": "",
+            "localidade_url": "Taboão da Serra",
+            "campanha": "Orgânico",
+            "origem_clique": "Direto",
+            "url_completa": "https:\/\/clinicaolharperfeito.com.br\/sao-paulo",
+            "ip": "191.30.132.209",
+            "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/138.0.0.0 Safari\/537.36"
+        }
+    },
+    {
+        "timestamp": 1755010747,
+        "data_hora": "2025-08-12 14:59:07",
+        "dados": {
+            "data": "12\/08\/2025",
+            "hora": "14:59:02",
+            "nome": "Taciara Furtado",
+            "telefone": "(11) 98214-4399",
+            "email": "contato@taciara.com.br",
+            "unidade": "Belo Horizonte",
+            "estado": "sao-paulo",
+            "cidade": "",
+            "localidade_url": "Taboão da Serra",
+            "campanha": "Orgânico",
+            "origem_clique": "Direto",
+            "url_completa": "https:\/\/clinicaolharperfeito.com.br\/sao-paulo",
+            "ip": "191.30.132.209",
+            "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/138.0.0.0 Safari\/537.36"
+        }
+    },
+    {
+        "timestamp": 1755011468,
+        "data_hora": "2025-08-12 15:11:08",
+        "dados": {
+            "data": "12\/08\/2025",
+            "hora": "15:11:05",
+            "nome": "Taciara Furtado",
+            "telefone": "(11) 98214-4399",
+            "email": "contato@taciara.com.br",
+            "unidade": "Belo Horizonte",
+            "estado": "sao-paulo",
+            "cidade": "",
+            "localidade_url": "Taboão da Serra",
+            "campanha": "Orgânico",
+            "origem_clique": "Direto",
+            "url_completa": "https:\/\/clinicaolharperfeito.com.br\/sao-paulo",
+            "ip": "191.30.132.209",
+            "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/138.0.0.0 Safari\/537.36"
+        }
+    },
+    {
+        "timestamp": 1755011818,
+        "data_hora": "2025-08-12 15:16:58",
+        "dados": {
+            "data": "12\/08\/2025",
+            "hora": "15:16:52",
+            "nome": "Taciara Furtado",
+            "telefone": "(11) 98214-4399",
+            "email": "contato@taciara.com.br",
+            "unidade": "Mogi das Cruzes",
+            "estado": "sao-paulo",
+            "cidade": "",
+            "localidade_url": "Taboão da Serra",
+            "campanha": "Orgânico",
+            "origem_clique": "Direto",
+            "url_completa": "https:\/\/clinicaolharperfeito.com.br\/sao-paulo",
+            "ip": "191.30.132.209",
+            "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/138.0.0.0 Safari\/537.36"
+        }
+    },
+    {
+        "timestamp": 1755011896,
+        "data_hora": "2025-08-12 15:18:16",
+        "dados": {
+            "data": "12\/08\/2025",
+            "hora": "15:18:12",
+            "nome": "Taciara Furtado",
+            "telefone": "(11) 98214-4399",
+            "email": "contato@taciara.com.br",
+            "unidade": "Belo Horizonte",
+            "estado": "belo-horizonte",
+            "cidade": "belo-horizonte",
+            "localidade_url": "Taboão da Serra",
+            "campanha": "Orgânico",
+            "origem_clique": "Direto",
+            "url_completa": "https:\/\/clinicaolharperfeito.com.br\/belo-horizonte",
+            "ip": "191.30.132.209",
+            "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/138.0.0.0 Safari\/537.36"
+        }
+    },
+    {
+        "timestamp": 1755011923,
+        "data_hora": "2025-08-12 15:18:43",
+        "dados": {
+            "data": "12\/08\/2025",
+            "hora": "15:18:41",
+            "nome": "Taciara Furtado",
+            "telefone": "(11) 98214-4399",
+            "email": "contato@taciara.com.br",
+            "unidade": "Pirajussara",
+            "estado": "sao-paulo",
+            "cidade": "",
+            "localidade_url": "Taboão da Serra",
+            "campanha": "Orgânico",
+            "origem_clique": "Direto",
+            "url_completa": "https:\/\/clinicaolharperfeito.com.br\/sao-paulo",
+            "ip": "191.30.132.209",
+            "user_agent": "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/138.0.0.0 Safari\/537.36"
+        }
     }
 ]

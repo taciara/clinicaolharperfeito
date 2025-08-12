@@ -388,10 +388,10 @@ if (count($partes) === 1) {
 </section>
 
 <!-- Botão fixo mobile para abrir formulário -->
-<button class="mobile-agendamento-btn" id="openFormMobile">
-  <i class="fas fa-calendar-plus btn-icon"></i>
-  <span class="btn-text">Agendar Exame</span>
-</button>
+        <button class="mobile-agendamento-btn" id="openFormMobile" onclick="window.buttonTracker.trackClick('btn-mobile-fixo', 'Agendar Exame');">
+          <i class="fas fa-calendar-plus btn-icon"></i>
+          <span class="btn-text">Agendar Exame</span>
+        </button>
 
 
 
@@ -403,7 +403,7 @@ if (count($partes) === 1) {
           <h1>Exame de Vista Acessível com Optometrista em <?php echo $nome ? htmlspecialchars($nome) : '[location]'; ?>?</h1>
           <p>Você foi selecionado para participar do Projeto Olhar Perfeito em <?php echo $nome ? htmlspecialchars($nome) : '[location]'; ?>! Faça seu <strong>exame de vista 100% Acessível</strong> com optometristas especializados em <?php echo $nome ? htmlspecialchars($nome) : '[location]'; ?>. <strong>Restam poucas vagas</strong> — garanta já a sua!</p>
           <div class="wrapper d-flex flex-column flex-lg-row gap-2 align-items-center">
-            <button type="button" class="btn-padrao btn-pulsante" onclick="scrollToForm()">Agendar Exame</button>
+            <button type="button" class="btn-padrao btn-pulsante" id="btn-agendar-hero" onclick="window.buttonTracker.trackClick('btn-agendar-hero', 'Agendar Exame'); scrollToForm();">Agendar Exame</button>
             <p>Restam poucas vagas para agendamento!</p>
           </div>
         </div>
@@ -454,7 +454,7 @@ if (count($partes) === 1) {
           <li>Estrutura confortável e segura em <?php echo $nome ? htmlspecialchars($nome) : '[location]'; ?></li>
           <li>Mais de 200 mil pessoas atendidas em <?php echo $nome ? htmlspecialchars($nome) : '[location]'; ?></li>
         </ul>
-        <button type="button" class="btn-padrao btn-pulsante" onclick="scrollToForm()">Agendar Exame</button>
+        <button type="button" class="btn-padrao btn-pulsante" id="btn-agendar-img-texto-1" onclick="window.buttonTracker.trackClick('btn-agendar-img-texto-1', 'Agendar Exame'); scrollToForm();">Agendar Exame</button>
 
         </div>
         <figure class="col-lg-5 mb-0 order-2 order-lg-2 mt-5 mt-lg-0">
@@ -477,7 +477,7 @@ if (count($partes) === 1) {
           <li>Equipe treinada para ouvir, orientar e cuidar de você em <?php echo $nome ? htmlspecialchars($nome) : '[location]'; ?></li>
           <li>Mais de 200 mil pessoas já atendidas em <?php echo $nome ? htmlspecialchars($nome) : '[location]'; ?></li>
         </ul>
-        <button type="button" class="btn-padrao btn-pulsante" onclick="scrollToForm()">Agendar Exame</button>
+        <button type="button" class="btn-padrao btn-pulsante" id="btn-agendar-img-texto-2" onclick="window.buttonTracker.trackClick('btn-agendar-img-texto-2', 'Agendar Exame'); scrollToForm();">Agendar Exame</button>
 
         </div>
         <figure class="col-lg-5 mb-0 order-2 order-lg-0 mt-5 mt-lg-0">
@@ -574,7 +574,7 @@ if (count($partes) === 1) {
   <div class="container text-center">
     <h2 class="fw-bold">Agende Seu Exame de Vista 100% Acessível Agora em <?php echo $nome ? htmlspecialchars($nome) : '[location]'; ?></h2>
     <p class="lead">Vagas limitadas em sua região de <?php echo $nome ? htmlspecialchars($nome) : '[location]'; ?>. Garanta seu atendimento com optometrista ainda hoje.</p>
-    <button type="button" class="btn btn-light px-4 py-2 btn-pulsante" onclick="scrollToForm()">Agendar Exame</button>
+    <button type="button" class="btn btn-light px-4 py-2 btn-pulsante" id="btn-agendar-cta-final" onclick="window.buttonTracker.trackClick('btn-agendar-cta-final', 'Agendar Exame'); scrollToForm();">Agendar Exame</button>
   </div>
 </section>
 
@@ -595,7 +595,7 @@ if (count($partes) === 1) {
               <li>Atendimento rápido e humanizado</li>
               <li>Unidade próximo a <?php echo $nome ? htmlspecialchars($nome) : '[location]'; ?></li>
             </ul>
-            <button type="button" class="btn-padrao btn-pulsante w-100" onclick="scrollToForm()">Agendar Exame</button>
+            <button type="button" class="btn-padrao btn-pulsante w-100" id="btn-agendar-servicos" onclick="window.buttonTracker.trackClick('btn-agendar-servicos', 'Agendar Exame'); scrollToForm();">Agendar Exame</button>
           </div>
         </div>
       </div>
@@ -644,6 +644,62 @@ var cidadesPorEstado = <?php echo json_encode($cidades_por_estado); ?>;
 window.currentLocation = <?php echo json_encode($nome ? htmlspecialchars($nome) : '[location]'); ?>;
 window.currentEstado = <?php echo json_encode($estado_atual ? htmlspecialchars($estado_atual) : ''); ?>;
 window.currentCidade = <?php echo json_encode($cidade_atual ? htmlspecialchars($cidade_atual) : ''); ?>;
+
+// Sistema de rastreamento de botões
+window.buttonTracker = {
+    lastClickedButton: null,
+    lastClickedTime: null,
+    
+    // Registra o clique em um botão
+    trackClick: function(buttonId, buttonText) {
+        this.lastClickedButton = buttonId;
+        this.lastClickedTime = new Date().toISOString();
+        console.log('Botão clicado:', buttonId, 'Texto:', buttonText, 'Hora:', this.lastClickedTime);
+    },
+    
+    // Obtém informações do último botão clicado
+    getLastButtonInfo: function() {
+        if (this.lastClickedButton && this.lastClickedTime) {
+            var timeDiff = Math.floor((new Date() - new Date(this.lastClickedTime)) / 1000);
+            if (timeDiff <= 300) { // 5 minutos
+                return this.lastClickedButton;
+            }
+        }
+        return 'Direto';
+    }
+};
+
+// Função para formatar localidade de forma legível
+window.formatLocalidade = function() {
+    var buttonInfo = window.buttonTracker.getLastButtonInfo();
+    var localidade = '';
+    
+    if (window.currentEstado && window.currentCidade) {
+        // Formata: "São Paulo - Mooca"
+        localidade = window.currentEstado + ' - ' + window.currentCidade;
+    } else if (window.currentEstado) {
+        // Formata: "São Paulo"
+        localidade = window.currentEstado;
+    } else if (window.currentLocation && window.currentLocation !== '[location]') {
+        // Usa a localidade da URL se disponível
+        localidade = window.currentLocation;
+    } else {
+        // Tenta extrair da URL atual
+        var path = window.location.pathname;
+        if (path && path !== '/') {
+            var parts = path.split('/').filter(function(part) { return part.length > 0; });
+            if (parts.length >= 2) {
+                localidade = parts[0] + ' - ' + parts[1];
+            } else if (parts.length === 1) {
+                localidade = parts[0];
+            }
+        }
+        if (!localidade) localidade = '[location]';
+    }
+    
+    // Adiciona informação do botão
+    return localidade + ' | Botão: ' + buttonInfo;
+};
 </script>
 <script src="/assets/js/agendamento.js?12ago25"></script>
     <button type="button" id="btn_chat_whatsapp" onclick="scrollToForm()"><span>Agendar Exame</span><i><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" class="whatsapp-icon m-0"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg></i></button>
